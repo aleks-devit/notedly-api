@@ -25,7 +25,7 @@ const getUser = token => {
 }
 
 // Запускаем сервер на порте, указанном в файле .env, или на порте 4000
-const port = process.env.port || 4000
+const port = process.env.PORT || 4000
 // Сохраняем значение DB_HOST в виде переменной
 const DB_HOST = process.env.DB_HOST
 
