@@ -1,3 +1,6 @@
+/**
+ *@file index.js is the root file for this app. He needed for create link api and database, initialization and set params ApolloServer, create server express.
+ */
 const depthLimit = require('graphql-depth-limit');
 const { createComplexityLimitRule } = require('graphql-validation-complexity');
 const express = require('express')
@@ -12,10 +15,15 @@ const models = require('./models')
 const typeDefs = require('./shema')
 const resolvers = require('./resolvers')
 
+/**
+ * @function Function decode jwt-token
+ * @param token
+ * @returns {*} Object with info about user which is encrypted in the token
+ */
 const getUser = token => {
   if(token){
     try {
-      // Возвращаем информацию пользователя из токена
+      /**Возвращаем информацию пользователя из токена*/
       return jwt.verify(token, process.env.JWT_SECRET)
     }catch (err) {
       // Если с токеном возникла проблема, выбрасываем ошибку

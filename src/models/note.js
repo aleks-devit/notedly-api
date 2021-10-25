@@ -1,3 +1,7 @@
+/**
+ * @module Задача параметров модели заметок.
+ *
+ */
 // Запросим библиотеку mongoose
 const mongoose = require('mongoose')
 

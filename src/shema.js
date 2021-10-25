@@ -1,3 +1,6 @@
+/**
+ * @fileOverview Файли содержаший схемы для GraphQL
+ */
 const { gql } = require('apollo-server-express');
 
 // Построение схемы с использованием языка схем GraphQL

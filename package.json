@@ -8,7 +8,8 @@
     "dev": "nodemon src/index.js",
     "final": "nodemon final/index.js",
     "seed": "node final/util/seed/index.js",
-    "lint": "eslint \"src/**/*.js\""
+    "lint": "eslint \"src/**/*.js\"",
+    "docs": "./node_modules/.bin/jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -43,11 +44,16 @@
     "passport-github2": "0.1.11"
   },
   "devDependencies": {
+    "better-docs": "^2.3.2",
     "eslint": "5.13.0",
     "eslint-config-prettier": "4.0.0",
     "eslint-plugin-prettier": "3.0.1",
     "faker": "4.1.0",
+    "jsdoc": "^3.6.7",
+    "jsdoc-mermaid": "^1.0.0",
+    "minami": "^1.2.3",
     "node-fetch": "2.5.0",
-    "prettier": "1.18.2"
+    "prettier": "1.18.2",
+    "replace": "^1.2.1"
   }
 }

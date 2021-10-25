@@ -1,9 +1,15 @@
-// Затребуем библиотеку mongoose
+/**
+ * @module  Config DB
+ */
 const mongoose = require('mongoose')
-
 module.exports = {
+  /**
+   * This callback helps you set up your database connection via mongoose.
+   * @function connect
+   * @param {string} DB_HOST Host address DB
+   * Many info about set config mongoose  {@link https://mongoosejs.com/}
+   */
   connect: DB_HOST => {
-    // Используем обновленный парсер строки URL драйвера Mongo
     mongoose.set('useNewUrlParser', true)
     // Поставим findOneAndUpdate () вместо findAndModify ()
     mongoose.set('useFindAndModify', false)

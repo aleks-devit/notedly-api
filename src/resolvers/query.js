@@ -1,35 +1,91 @@
+/** @module Query_resolvers*/
 module.exports = {
+  /**
+   * @async
+   * @function notes
+   * @description get all notes from DB
+   * @param parent Contain object property root query
+   * @param args The arguments provided to the field in the GraphQL query
+   * @param models Models entities from DB, added across context Apollo
+   * @returns {array} Array notes
+   */
   notes: async (parent, args, { models }) => {
     return await models.Note.find().limit(100)
   },
+  /**
+   * @async
+   * @function note
+   * @description get one note from db
+   * @param parent Contain object property root query
+   * @param args The arguments provided to the field in the GraphQL query
+   * @param models Models entities from DB, added across context Apollo
+   * @returns {array} Note
+   */
   note: async (parent, args, { models }) => {
     return await models.Note.findById(args.id)
   },
+  /**
+   * @async
+   * @function user
+   * @description get user from DB by username
+   * @param parent Contain object property root query
+   * @param username Username
+   * @param models Models entities from DB, added across context Apollo
+   * @returns {object} User
+   */
   user: async (parent, {username}, { models }) => {
-    // Находим пользователя по имени
+    // Find user by name
     return await models.User.findOne({username})
   },
+  /**
+   * @async
+   * @function users
+   * @description Get all users from DB
+   * @param parent Contain object property root query
+   * @param args The arguments provided to the field in the GraphQL query
+   * @param models Models entities from DB, added across context Apollo
+   * @returns {array} Array users
+   */
   users: async (parent, args, {models}) => {
-    // Находим всех пользователей
+    // Find all users in DB
     return await models.User.find({})
   },
+  /**
+   * @async
+   * @function me
+   * @description Get info about me
+   * @param parent Contain object property root query
+   * @param args The arguments provided to the field in the GraphQL query
+   * @param models Models entities from DB, added across context Apollo
+   * @param user Get info about me from context
+   * @returns {object} Info about me
+   */
   me: async (parent, args, {models, user}) => {
-    // Находим пользователя по текущему пользовательскому контексту
+    // Find user in DB use id user from context
     return await models.User.findById(user.id)
   },
+  /**
+   * @async
+   * @function noteFeed
+   * @description This method help get notes by page
+   * @param parent Contain object property root query
+   * @param cursor By this value this method get notes
+   * @param models Models entities from DB, added across context Apollo
+   * @returns {object} This method return object contain: list notes, cursor and bool value about next page
+   */
   noteFeed: async (parent, {cursor}, {models}) => {
-    // Жестко кодируем лимит в 10 элементов
+    // Set limit notes count
     const limit = 10;
 
-    // Устанавливаем значение false по умолчанию для hasNextPage
+    // Set value false to default
     let hasNextPage = false
 
-    // Если курсор передан не будет, то по умолчанию запрос будет пуст
-    // В таком случае из БД будут извлечены последние заметки
+    // If cursor === null, this method return last notes
     let cursorQuery = {}
 
     // Если курсор задан, запрос будет искать заметки со значением ObjectId
     // меньше этого курсора
+    console.log('1');
     if(cursor) {
       cursorQuery = {_id: {$lt: cursor}}
     }
